@@ -1,6 +1,8 @@
 <template lang="pug">
   #app
     pm-header
+    pm-notification(v-show="isShowNotification")
+      p(slot="body") No se encontraron resultados
 
     pm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
@@ -37,16 +39,17 @@ import PmHeader from '@/components/layout/Header.vue'
 
 import PmTrack from '@/components/Track.vue'
 import PmLoader from '@/components/shared/Loader.vue'
-
+import PmNotification from '@/components/shared/Notification.vue'
 export default {
   name: 'app',
-  components: { PmFooter, PmHeader, PmTrack, PmLoader },
+  components: { PmFooter, PmHeader, PmTrack, PmLoader, PmNotification },
   data () {
     return {
         searchQuery: '',
         tracks: [],
         isLoading: false,
-        selectedTrack: ''
+        selectedTrack: '',
+        isShowNotification: false
     }
  },
  methods: {
@@ -56,6 +59,7 @@ export default {
      // this.tracks = tracks
       trackService.search(this.searchQuery)
         .then(res => {
+          this.isShowNotification = res.tracks.total == 0
           this.tracks = res.tracks.items
           this.isLoading = false
         })
@@ -68,10 +72,19 @@ export default {
     searchMessage(){
       return `Encontrados: ${this.tracks.length}`
     }
+  },
+  watch: {
+    isShowNotification(){
+      if(this.isShowNotification){
+        setTimeout(() => {
+          this.isShowNotification = false
+        }, 3000) // Tiempo en milisegundos (3 segundos)
+      } 
+    }
   }
 }
 </script>
-
+ 
 <style lang="scss">
   @import './scss/main.scss';
   

@@ -11,4 +11,13 @@
       .contaniner.has-text-centered
         h1.tittle Platzi Music
         h2.subtittle Canciones que están en Vue
+        pm-player
 </template>
+
+<script>
+  import PmPlayer from '@/components/Player.vue'
+  
+  export default {
+    components: { PmPlayer }
+  }
+</script>

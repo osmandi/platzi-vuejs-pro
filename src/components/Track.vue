@@ -23,12 +23,13 @@
 <script>
   export default {
     props: {
-      track: { type: Object, requeried: true }
+      track: { type: Object, required: true }
     },
     methods: {
       selectTrack(){
         // 'select' es el evento, el otro es el parámetro que recibirá el padre.
         this.$emit('select', this.track.id)
+        this.$bus.$emit('set-track', this.track)
       }
     }
   }

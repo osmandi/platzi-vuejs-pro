@@ -6,15 +6,14 @@
     pm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.nav
-        .container
-          input.input.is-large(
+        .container.field.is-grouped
+          input.input.is-large.is-rounded(
            type="text", 
            placeholder="Buscar canciones",
            v-model="searchQuery"
           )          
-          a.button.is-info.is-large(@click="search") Buscar          
+          a.button.is-info.is-large(@click="search", id="b-buscar") Buscar          
           a.button.is-danger.is-large &times;
-
       .container
          p
           small {{ searchMessage  }}
@@ -90,5 +89,10 @@ export default {
   
   .is-active{
     border: 3px #23d160 solid;
-  }  
-</style> 
+  },
+  #b-buscar{
+    background-color: black;
+    margin-left:10px;
+  }
+
+</style> ""

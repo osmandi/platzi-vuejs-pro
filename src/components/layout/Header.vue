@@ -7,6 +7,8 @@
             .nav-item
               strong 😈 Platzi Music
           .nav-right.nav-menu
+            router-link.nav-item(:to=" { name: 'search' } ") Buscar
+            router-link.nav-item(to="about") Nosotros
     .hero-body
       .contaniner.has-text-centered
         h1.tittle Platzi Music

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .card
+  .card(v-if="track && track.album")
     .card-image
       figure.image.is-1by1
         img(:src="track.album.images[0].url")
@@ -17,7 +17,9 @@
         nav.level
           .level-left
             a.level-item
-              span.icon.is-small(@click="selectTrack") 👍
+              span.icon.is-small(@click="selectTrack") ▶️
+            a.level-item
+              span.icon.is-small(@click="goToTrack(track.id)") 🌎
     
 </template>
 <script>
@@ -30,6 +32,10 @@
         // 'select' es el evento, el otro es el parámetro que recibirá el padre.
         this.$emit('select', this.track.id)
         this.$bus.$emit('set-track', this.track)
+      },
+
+      goToTrack (id){
+        this.$router.push({ name: 'track', params: {id}  })
       }
     }
   }

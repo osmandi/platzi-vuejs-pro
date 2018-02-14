@@ -1,9 +1,10 @@
 <template lang="pug">
   main
-    pm-notification(v-show="isShowNotification")
-      p(slot="body") No se encontraron resultados
-
-    pm-loader(v-show="isLoading")
+    transition(name="move")
+      pm-notification(v-show="isShowNotification")
+        p(slot="body") No se encontraron resultados
+    transition(name="move")
+      pm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.nav
         .container.field.is-grouped
